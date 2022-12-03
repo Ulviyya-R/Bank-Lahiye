@@ -8,6 +8,8 @@ namespace Ulka_Bank.Entities
 {
     internal static  class Help
     {
+
+        #region CheckPassword Metod
         public static bool CheckPassword(string passwor)
         {
             bool HasDigit = false;
@@ -15,46 +17,69 @@ namespace Ulka_Bank.Entities
             bool HasUpper = false;
             bool result = false;
             char[] digits = { '0', '1', '3', '4', '5', '6', '7', '8', '9' };
-            foreach (char chars in passwor)
+            if (passwor.Length>7)
             {
-                foreach (var item in digits)
+                foreach (char chars in passwor)
                 {
-                    if (chars == item)
+                    foreach (var item in digits)
+                    {
+                        if (chars == item)
+                        {
+                            HasDigit = true;
+                        }
+                    }
+                    if (char.IsDigit(chars))
                     {
                         HasDigit = true;
                     }
+                    else if (char.IsLower(chars))
+                    {
+                        HasLower = true;
+                    }
+                    else if (char.IsUpper(chars))
+                    {
+                        HasUpper = true;
+                    }
+                    result = HasDigit && HasLower && HasUpper;
+                    if (result)
+                    {
+                        return true;
+                    }
+                   
                 }
-                if (char.IsDigit(chars))
-                {
-                    HasDigit = true;
                 }
-                else if (char.IsLower(chars))
-                {
-                    HasLower = true;
-                }
-                else if (char.IsUpper(chars))
-                {
-                    HasUpper = true;
-                }
-                result = HasDigit && HasLower && HasUpper;
-                if (result)
-                {
-                    break;
-                }
-            }
             return result;
         }
+        #endregion
 
+        #region CheckEmail Metod
         public static bool CheckEmail(string email)
         {
-            if (email.Contains("@"))
+            if (email.Contains("@ulka.bank.az") == true)
             {
                 return true;
             }
             else
             {
-                return false;
+                Console.WriteLine("here should be @ulka.bank.az");
             }
+            return false;
         }
+        #endregion
+
+        #region NameSurnameChecker Metod
+        public static bool NameSurnameChecker(string name,string surname)
+        {
+            if(name.Length>2 && surname.Length>2)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Name and Surname length must be at least 3");
+            }
+            return false;
+        }
+        #endregion
     }
 }

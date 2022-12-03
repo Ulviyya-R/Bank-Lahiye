@@ -17,7 +17,8 @@ namespace Ulka_Bank.Service
             _repository = new UserRepository();
         }
 
-       public bool? UserRegistration(string name, string surname, string email, string password, bool isAdmin)
+        #region UserRegistration
+        public bool? UserRegistration(string name, string surname, string email, string password, bool isAdmin)
         {
             foreach (User gmail in _repository.Bank.Users)
             {
@@ -27,11 +28,29 @@ namespace Ulka_Bank.Service
                 }
             }
             User user = new User(name, surname, email, password, isAdmin);
+            _repository.UserRegistration(user);
             return true;
 
         }
+        #endregion
 
-        public bool FindUser(string email, string password)
+
+        #region UserLogin
+        public bool UserLogin (string email,string password)
+        {
+              EmailPassFind(email, password);
+            if (EmailPassFind(email, password) == true)
+            {
+                _repository.UserLogin(email, password);
+                return true;
+            }
+                return false;
+        }
+        #endregion
+
+
+        #region FindUser
+        public bool FindUser(string email)
        {
                User exicted = default;
              foreach (User gmail in _repository.Bank.Users)
@@ -48,7 +67,9 @@ namespace Ulka_Bank.Service
             _repository.FindUser(exicted);
             return true;
            }
+        #endregion
 
+        #region EmailPassFind
         bool EmailPassFind(string email, string password) 
         {
           foreach (User user in _repository.Bank.Users)
@@ -60,22 +81,9 @@ namespace Ulka_Bank.Service
             }
             return false;
         }
-        public bool UserLogin (string email,string password)
-        {
-              EmailPassFind(email, password);
-            if (EmailPassFind(email,password) == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            _repository.UserLogin(email, password);
-            return true;
-        }
+        #endregion
 
-}
+    }
 }
 	
 

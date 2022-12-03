@@ -8,22 +8,22 @@ namespace Ulka_Bank.Entities
 {
     internal class User
     {
-        int _id;
+         public int id;
         int _count;
-        public string _name;
-        public string _surname;
-        public string _email;
-        public string _password;
-        public double Balance;
+        string _name;
+        string _surname;
+        string _email;
+        string _password;
+        double _balance;
         public bool IsAdmin;
         public bool IsBlocked;
         public bool IsLogged;
 
        public User()
         {
-            _count = 1000;
+            _count = 0;
         }
-        protected string Name
+        public string Name
         {
             get
             {
@@ -31,13 +31,13 @@ namespace Ulka_Bank.Entities
             }
             set
             {
-                if (value.Length > 3)
+                if (Help.NameSurnameChecker(value,value))
                 {
                     _name = value;
                 }
             }
         }
-        protected string Surname
+        public string Surname
         {
             get
 
@@ -46,12 +46,26 @@ namespace Ulka_Bank.Entities
             }
             set
             {
-                if (value.Length > 3)
+                if (Help.NameSurnameChecker(value,value))
                 {
                     _surname = value;
                 }
             }
         }
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+               if (Help.CheckEmail(value)) 
+                {
+                    _email = value;
+                }
+            }
+    }
         public string Password
         {
             get
@@ -67,20 +81,20 @@ namespace Ulka_Bank.Entities
             }
         }
         
-        public string Email
-        {
-            get
-            {
-                return _email;
+        public double Balance {
+            
+            get 
+            { 
+                return _balance;
+            
             }
             set
             {
-               if (Help.CheckEmail(value)) 
-                {
-                    _email = value;
-                }
+                _balance = value;
             }
-    }
+           
+
+        }
 
         public User(string name, string surname, string email, string password, bool IsAdmin = false )
         {
@@ -89,7 +103,8 @@ namespace Ulka_Bank.Entities
             Surname = surname;
             Email = email;
             Password = password;
-            _id = ++_count;
+            id = ++_count;
+            Balance = default;
             IsAdmin = false;
             IsBlocked= false;
             IsLogged = false;

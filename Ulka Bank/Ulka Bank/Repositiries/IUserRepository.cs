@@ -10,7 +10,7 @@ namespace Ulka_Bank.Repositiries
     internal interface IUserRepository
     {
         public Bank Bank { get; }
-        void UserRegistration(string name, string surname, string email, string password, bool isAdmin);
+        void UserRegistration(User user);
 
         bool UserLogin(string email, string password);
 

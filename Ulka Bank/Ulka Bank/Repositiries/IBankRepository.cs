@@ -13,14 +13,16 @@ namespace Ulka_Bank.Repositiries
 
         void CheckBalance(User user);
 
-        void TopUpBalance(User user,double number);
+        void TopUpBalance(User user);
 
-        void ChangePassword(User user,string bankpassword);
+        string ChangePassword(User user,string newPass);
 
         void BankUserList();
 
-        void BlockUser(User user);
+        bool BlockUser(User user);
 
 
+        bool LogOut(User user);
+        
     }
 }

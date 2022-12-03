@@ -18,12 +18,13 @@ namespace Ulka_Bank.Repositiries
 
         }
 
-        public void UserRegistration(string name, string surname,string email, string password,bool isAdmin)
+        public void UserRegistration(User user)
         {
-           User user = new User (name,surname,email,password,isAdmin);
+           
             Array.Resize(ref _bank.Users, _bank.Users.Length + 1);
             _bank.Users[_bank.Users.Length - 1] = user;
         }
+
 
         public bool UserLogin(string email, string password)
         {
@@ -50,6 +51,7 @@ namespace Ulka_Bank.Repositiries
                 Console.WriteLine("User not found\r\n");
             }
         }
+      
 
     }
 }
