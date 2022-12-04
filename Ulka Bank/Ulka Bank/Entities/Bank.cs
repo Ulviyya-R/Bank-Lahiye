@@ -10,13 +10,8 @@ namespace Ulka_Bank.Entities
     internal class Bank
     {
         public int id;
-        public User[] Users;
+        public User[] Users=new User[0];
         static int count;
-
-        public Bank(int id, string name, string surname)
-        {
-            Users = new User[0];
-        }
 
         public Bank()
         {

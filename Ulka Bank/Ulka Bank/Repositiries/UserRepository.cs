@@ -23,6 +23,8 @@ namespace Ulka_Bank.Repositiries
            
             Array.Resize(ref _bank.Users, _bank.Users.Length + 1);
             _bank.Users[_bank.Users.Length - 1] = user;
+            Console.WriteLine("Your registration has been successfully completed");
+            Thread.Sleep(3000);
         }
 
 
@@ -32,7 +34,10 @@ namespace Ulka_Bank.Repositiries
             {
                 if (item.Email == email && item.Password == password)
                 {
-                    item.IsLogged = true;
+                  item.IsLogged = true;
+                    Console.WriteLine("entry is successful");
+                    Console.WriteLine($"name: {item.Name} surname: {item.Surname}" );
+                    Thread.Sleep(3000);
                     return true;
                 }
             }
@@ -44,14 +49,15 @@ namespace Ulka_Bank.Repositiries
            if (user !=null)
                 foreach ( User user1 in _bank.Users )
                 {
-                    Console.WriteLine(user1);
+                    Console.WriteLine(" User found "  + user1.ToString());
+                    
                 }
            else
             {
                 Console.WriteLine("User not found\r\n");
             }
         }
-      
 
+       
     }
 }

@@ -23,16 +23,18 @@ namespace Ulka_Bank
                 {
                     case '1':
                         MenuService.UserRegistration();
+                        Thread.Sleep(3000);
                         Console.Clear();
                         break;
                     case '2':
                         MenuService.UserLogin();
-                        Console.Clear();
+                        Thread.Sleep(3000);
+                       
                         break;
                     case '3':
                         MenuService.FindUser();
                         Thread.Sleep(3000);
-                        Console.Clear();
+                        
                         break;
                     default:
                         Console.WriteLine("Please choose correct number");

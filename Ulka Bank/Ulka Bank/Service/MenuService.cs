@@ -54,124 +54,135 @@ namespace Ulka_Bank.Service
 
 
 
-            bool IsAdmin = false;
             char YesOrNoA;
             User admin;
-            do
+
+            string Admin = null;
+            bool IsAdmin = false;
+
+            Console.WriteLine(" Are you Admin? yes Or No");
+            Admin = Console.ReadLine();
+
+
+            if (Admin == "y")
             {
-                Console.WriteLine(" Are you Admin? yes Or No");
-                IsAdmin = char.TryParse(Console.ReadLine(), out YesOrNoA);
-            } while (!IsAdmin);
-            
-            if (YesOrNoA.ToString().ToLower() == "y".ToString())
-            {
-                admin = new(name,surname,email,passwrd,true);
+                IsAdmin = true;
             }
-            else
+            else if (Admin == "n")
             {
-                admin = new(name, surname, email, passwrd);
+                IsAdmin = false;
             }
-            _uservice.UserRegistration(name, surname, email, passwrd,IsAdmin);
+            _uservice.UserRegistration(name, surname, email, passwrd, IsAdmin);
+        }
+
+            #endregion
+
+            #region UserLogin
+            public static void UserLogin()
+            {
+                string email;
+                string password;
+
+
+                do
+                {
+                Console.WriteLine("Please add your email");
+                    email = Console.ReadLine();
+                Console.WriteLine("Please add your password");
+                    password = Console.ReadLine();
+                } while (!_uservice.UserLogin(email, password));
+
             }
-        #endregion
+            #endregion
 
-        #region UserLogin
-        public static void UserLogin()
-        {
-            string email;
-            string password;
-
-            do
+            #region FindUser
+            public static void FindUser()
             {
-                email = Console.ReadLine();
-                password = Console.ReadLine();
-            } while (!_uservice.UserLogin(email, password));
-        
-        }
-        #endregion
+                string email;
+                do
+                {
+                Console.WriteLine("Please add your email");
+                    email = Console.ReadLine();
+                } while (!_uservice.FindUser(email));
+           
+            }
+            #endregion
+            #endregion
 
-        #region FindUser
-        public static void FindUser()
-        {
-            string email;
-            do
+
+            #region BankService
+            #region CheckBalance
+            public static void CheckBalance()
             {
-                email = Console.ReadLine();
-            } while (!_uservice.FindUser(email));
-        }
-        #endregion
-        #endregion
+                string password;
+                do
+                {
+                    password = Console.ReadLine();
+                } while (!_bservice.CheckBalance(password));
+            }
+            #endregion
 
 
-        #region BankService
-        #region CheckBalance
-        public static void CheckBalance()
-        {
-            string password;
-            do
+            #region TopUpBalance
+            public static void TopUpBalance()
             {
-                password = Console.ReadLine();
-            } while (!_bservice.CheckBalance(password));
-        }
-        #endregion
+                string password;
+                double newBal;
+                do
+                {
+                    password = Console.ReadLine();
+                    newBal = Convert.ToInt32(Console.ReadLine());
+                } while (!_bservice.TopUpBalance(password, newBal));
+            }
+            #endregion
 
-
-        #region TopUpBalance
-        public static void  TopUpBalance()
-        {
-            string password;
-            double newBal;
-            do
+            #region ChangePassword
+            public static void ChangePassword()
             {
-                password = Console.ReadLine();
-                newBal = Convert.ToInt32(Console.ReadLine());
-            } while (!_bservice.TopUpBalance(password, newBal));
-        }
-        #endregion
+                string password;
+                string newPassw;
 
-        #region ChangePassword
-        public static void ChangePassword()
-        {
-            string password;
-            string newPassw;
+                do
+                {
+                    password = Console.ReadLine();
+                    newPassw = Console.ReadLine();
+                    Help.CheckPassword(newPassw);
+                } while (!_bservice.ChangePassword(password, newPassw));
+            }
+            #endregion
 
-            do
+            #region BankUserList
+            public static void BankUserList()
             {
-                password = Console.ReadLine();
-                newPassw = Console.ReadLine();
-                Help.CheckPassword(newPassw);
-            } while (!_bservice.ChangePassword(password, newPassw));
-        }
-        #endregion
+                string email;
+                do
+                {
+                    Console.WriteLine("Enter your admin email");
+                    email = Console.ReadLine();
+                } while (!_bservice.BankUserList(email));
+            }
+            #endregion
 
-        #region BankUserList
-        public static void BankUserList()
-        {
-            string email;
-            do
+            #region BlockUser
+            public static void BlockUser()
             {
-                Console.WriteLine("Enter your admin email");
-                email = Console.ReadLine();
-            } while (!_bservice.BankUserList(email));
-        }
-        #endregion
+                BankUserList();
+                string email;
+                do
+                {
+                    Console.WriteLine("Enter the email address of the user you want to block");
+                    email = Console.ReadLine();
+                } while (!_bservice.BlockUser(email));
+            }
+            #endregion
+            #endregion
 
-        #region BlockUser
-        public static void BlockUser()
-        {
-            BankUserList();
-            string email;
-            do
-            {
-                Console.WriteLine("Enter the email address of the user you want to block");
-                email = Console.ReadLine();
-            } while (!_bservice.BlockUser(email));
         }
-        #endregion
-        #endregion
-
     }
-}
+
+
+
+
 
  
 

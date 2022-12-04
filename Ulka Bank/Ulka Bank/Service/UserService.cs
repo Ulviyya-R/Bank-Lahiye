@@ -24,6 +24,7 @@ namespace Ulka_Bank.Service
             {
                 if (gmail.Email == email)
                 {
+                    MenuService.UserRegistration();
                     return false;
                 }
             }
@@ -38,13 +39,15 @@ namespace Ulka_Bank.Service
         #region UserLogin
         public bool UserLogin (string email,string password)
         {
-              EmailPassFind(email, password);
-            if (EmailPassFind(email, password) == true)
+            foreach (User item in _repository.Bank.Users)
             {
-                _repository.UserLogin(email, password);
-                return true;
+                if (item.Email == email && item.Password == password)
+                {
+                    _repository.UserLogin(email,password);
+                    return true;
+                }
             }
-                return false;
+            return false;
         }
         #endregion
 
@@ -80,6 +83,11 @@ namespace Ulka_Bank.Service
                 }
             }
             return false;
+        }
+
+        internal void UserRegistration(string name, string surname, string email, string passwrd, object isAdmin)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
