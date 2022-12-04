@@ -111,6 +111,10 @@ namespace Ulka_Bank.Entities
 
             
         }
+        public User(string email)
+        {
+            Email = email;
+        }
        
        
 

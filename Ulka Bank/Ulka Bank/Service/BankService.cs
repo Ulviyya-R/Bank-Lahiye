@@ -19,14 +19,19 @@ namespace Ulka_Bank.Service
         #region CheckBalance
         public bool CheckBalance(string password)
         {
+            User exicted = default;
             foreach (User item in _repository.Bank.Users)
             {
                 if(item.Password == password )
                 {
-                    _repository.CheckBalance(item);
+                    exicted = item;
+                    Console.WriteLine("duz");
+                    _repository.CheckBalance(exicted);
                     return true;
                 }
             }
+            Console.WriteLine("Sef");
+            Thread.Sleep(2000);
                 return false;
         }
         #endregion
@@ -38,7 +43,7 @@ namespace Ulka_Bank.Service
             {
                 if(item.Password == password )
                 {
-                    item.Balance = newBal;
+                    item.Balance += newBal;
                     _repository.TopUpBalance(item);
                     return true;
                 }

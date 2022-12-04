@@ -19,6 +19,7 @@ namespace Ulka_Bank.Repositiries
 
         public void CheckBalance(User user)
         {
+            Console.WriteLine("Repo");
             Console.WriteLine(user.Balance);
         }
 

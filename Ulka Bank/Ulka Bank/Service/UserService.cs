@@ -4,6 +4,7 @@ using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Ulka_Bank.Entities;
 using Ulka_Bank.Repositiries;
 
@@ -24,6 +25,9 @@ namespace Ulka_Bank.Service
             {
                 if (gmail.Email == email)
                 {
+                    Console.WriteLine("This email had been registered ");
+                    Thread.Sleep(2000);
+                    Console.Clear();
                     MenuService.UserRegistration();
                     return false;
                 }
@@ -37,39 +41,46 @@ namespace Ulka_Bank.Service
 
 
         #region UserLogin
-        public bool UserLogin (string email,string password)
+        public bool UserLogin(string email, string password)
         {
             foreach (User item in _repository.Bank.Users)
             {
                 if (item.Email == email && item.Password == password)
                 {
-                    _repository.UserLogin(email,password);
-                    return true;
+                    _repository.UserLogin(item);
+                    return false;
                 }
+
             }
-            return false;
+                Console.WriteLine("--Email or password is incorrect...-- ");
+                return true;
+           
         }
         #endregion
 
 
         #region FindUser
         public bool FindUser(string email)
-       {
-               User exicted = default;
-             foreach (User gmail in _repository.Bank.Users)
+        {
+            User exicted = default;
+            foreach (User gmail in _repository.Bank.Users)
             {
                 if (gmail.Email == email)
                 {
                     exicted = gmail;
+                    _repository.FindUser(exicted);
+                    return false;
                 }
             }
-             if (exicted == null) 
+            if (exicted == null)
             {
+                Console.WriteLine("--This email is not registered--");
                 return false;
             }
+                Console.WriteLine("Not Found");
             _repository.FindUser(exicted);
-            return true;
-           }
+            return false;
+        }
         #endregion
 
         #region EmailPassFind
@@ -85,10 +96,7 @@ namespace Ulka_Bank.Service
             return false;
         }
 
-        internal void UserRegistration(string name, string surname, string email, string passwrd, object isAdmin)
-        {
-            throw new NotImplementedException();
-        }
+        
         #endregion
 
     }

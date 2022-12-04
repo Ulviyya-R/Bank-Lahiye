@@ -90,7 +90,7 @@ namespace Ulka_Bank.Service
                     email = Console.ReadLine();
                 Console.WriteLine("Please add your password");
                     password = Console.ReadLine();
-                } while (!_uservice.UserLogin(email, password));
+                } while (_uservice.UserLogin(email, password));
 
             }
             #endregion
@@ -103,7 +103,7 @@ namespace Ulka_Bank.Service
                 {
                 Console.WriteLine("Please add your email");
                     email = Console.ReadLine();
-                } while (!_uservice.FindUser(email));
+                } while (_uservice.FindUser(email));
            
             }
             #endregion

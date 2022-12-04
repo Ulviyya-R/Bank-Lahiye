@@ -12,7 +12,7 @@ namespace Ulka_Bank.Repositiries
         public Bank Bank { get; }
         void UserRegistration(User user);
 
-        bool UserLogin(string email, string password);
+        bool UserLogin(User user);
 
         void FindUser(User user);
 

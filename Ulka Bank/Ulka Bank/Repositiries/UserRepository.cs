@@ -24,38 +24,24 @@ namespace Ulka_Bank.Repositiries
             Array.Resize(ref _bank.Users, _bank.Users.Length + 1);
             _bank.Users[_bank.Users.Length - 1] = user;
             Console.WriteLine("Your registration has been successfully completed");
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
         }
 
 
-        public bool UserLogin(string email, string password)
+        public bool UserLogin(User user)
         {
-            foreach (User item in _bank.Users)
-            {
-                if (item.Email == email && item.Password == password)
-                {
-                  item.IsLogged = true;
-                    Console.WriteLine("entry is successful");
-                    Console.WriteLine($"name: {item.Name} surname: {item.Surname}" );
-                    Thread.Sleep(3000);
+                  user.IsLogged = true;
+                    Console.WriteLine("entry is successful!");
+                    Console.WriteLine($"name: {user.Name} surname: {user.Surname}  " );
+                    Thread.Sleep(2000);
                     return true;
                 }
-            }
-            return false;
-        }
+
 
         public void FindUser(User user)
         {
-           if (user !=null)
-                foreach ( User user1 in _bank.Users )
-                {
-                    Console.WriteLine(" User found "  + user1.ToString());
-                    
-                }
-           else
-            {
-                Console.WriteLine("User not found\r\n");
-            }
+            Console.WriteLine("User: " + user.Name + "Surname: " +user.Surname) ;
+            Thread.Sleep(2000);
         }
 
        

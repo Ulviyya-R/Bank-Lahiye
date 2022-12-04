@@ -76,7 +76,7 @@ namespace Ulka_Bank.Entities
             }
             else
             {
-                Console.WriteLine("Name and Surname length must be at least 3");
+                Console.WriteLine("Name and Surname must be 3 letters length");
             }
             return false;
         }
