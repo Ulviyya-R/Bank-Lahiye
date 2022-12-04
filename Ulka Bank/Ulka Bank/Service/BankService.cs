@@ -11,27 +11,30 @@ namespace Ulka_Bank.Service
     internal class BankService
     {
         readonly IBankRepository _repository;
+        Bank bank;
+        public BankService(Bank bank)
+        {
+            this.bank = bank;
+            _repository = new BankRepository(this.bank);
+        }
+
         public BankService()
         {
-            _repository = new BankRepository();
         }
 
         #region CheckBalance
         public bool CheckBalance(string password)
         {
-            User exicted = default;
-            foreach (User item in _repository.Bank.Users)
+          
+            foreach (User item in bank.Users)
             {
                 if(item.Password == password )
                 {
-                    exicted = item;
-                    Console.WriteLine("duz");
-                    _repository.CheckBalance(exicted);
+                    double balance = 0.0;
+                    _repository.CheckBalance(balance);
                     return true;
                 }
             }
-            Console.WriteLine("Sef");
-            Thread.Sleep(2000);
                 return false;
         }
         #endregion
@@ -39,12 +42,12 @@ namespace Ulka_Bank.Service
         #region TopUpBalance
         public bool TopUpBalance(string password, double newBal)
         {
-            foreach (User item in _repository.Bank.Users)
+            foreach (User item in bank.Users)
             {
                 if(item.Password == password )
                 {
-                    item.Balance += newBal;
-                    _repository.TopUpBalance(item);
+       
+                    _repository.TopUpBalance(item,newBal);
                     return true;
                 }
             }return false;
@@ -55,7 +58,7 @@ namespace Ulka_Bank.Service
         public bool ChangePassword(string currentpas,string newPass)
         {
             User exicted = default;
-            foreach (User item in _repository.Bank.Users)
+            foreach (User item in bank.Users)
             {
                 if (item.Password == currentpas)
                 {
@@ -72,7 +75,7 @@ namespace Ulka_Bank.Service
         public bool BankUserList(string email)
         {
             User exicted;
-            foreach (User item in _repository.Bank.Users)
+            foreach (User item in bank.Users)
             {
                 if (item.Email == email)
                 {
@@ -93,7 +96,7 @@ namespace Ulka_Bank.Service
         public bool BlockUser(string email)
         {
             User exicted;
-            foreach (User item in _repository.Bank.Users)
+            foreach (User item in bank.Users)
             {
                 if (item.Email == email)
                 {

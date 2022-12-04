@@ -13,9 +13,11 @@ namespace Ulka_Bank.Service
     internal class UserService
     {
         readonly IUserRepository _repository;
-        public UserService()
+        Bank bank;
+        public UserService(Bank bank)
         {
-            _repository = new UserRepository();
+            this.bank = bank;
+            _repository = new UserRepository(this.bank);
         }
 
         #region UserRegistration
@@ -48,12 +50,18 @@ namespace Ulka_Bank.Service
                 if (item.Email == email && item.Password == password)
                 {
                     _repository.UserLogin(item);
-                    return false;
+
+                    MenuService.BankOptions();
+                    return true;
+                   
                 }
 
             }
                 Console.WriteLine("--Email or password is incorrect...-- ");
-                return true;
+            Thread.Sleep(2000);
+           
+        
+            return false;
            
         }
         #endregion

@@ -12,20 +12,22 @@ namespace Ulka_Bank.Repositiries
         Bank _bank;
         public Bank Bank { get => _bank; }
 
-        public BankRepository()
+        public BankRepository(Bank bank)
         {
-            _bank= new Bank();
+            _bank=  bank;
         }
 
-        public void CheckBalance(User user)
+        public void CheckBalance(double balance)
         {
-            Console.WriteLine("Repo");
-            Console.WriteLine(user.Balance);
+           
+            Console.WriteLine(balance);
         }
 
-        public void TopUpBalance(User user)
+        public void TopUpBalance(User user,double newBal)
         {
-            Console.WriteLine(user.Balance);
+            user.Balance += newBal;
+            Console.WriteLine("Successfully Added. New Balance: " + user.Balance);
+
         }
         public string ChangePassword(User user, string newPas)
         {
@@ -50,6 +52,10 @@ namespace Ulka_Bank.Repositiries
         public bool LogOut(User user)
         {
             return user.IsLogged = false;
+        }
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 

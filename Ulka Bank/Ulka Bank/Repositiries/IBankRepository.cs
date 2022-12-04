@@ -11,9 +11,9 @@ namespace Ulka_Bank.Repositiries
     {
         public Bank Bank { get; }
 
-        void CheckBalance(User user);
+        void CheckBalance(double balance);
 
-        void TopUpBalance(User user);
+        void TopUpBalance(User user,double newBal);
 
         string ChangePassword(User user,string newPass);
 

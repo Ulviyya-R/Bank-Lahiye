@@ -12,9 +12,9 @@ namespace Ulka_Bank.Repositiries
     {
         Bank _bank;       
         public Bank Bank  {get  =>  _bank; }    
-        public UserRepository()
+        public UserRepository(Bank bank)
         {
-           _bank = new Bank();
+           _bank = bank;
 
         }
 
@@ -28,13 +28,12 @@ namespace Ulka_Bank.Repositiries
         }
 
 
-        public bool UserLogin(User user)
+        public void UserLogin(User user)
         {
                   user.IsLogged = true;
                     Console.WriteLine("entry is successful!");
                     Console.WriteLine($"name: {user.Name} surname: {user.Surname}  " );
                     Thread.Sleep(2000);
-                    return true;
                 }
 
 
