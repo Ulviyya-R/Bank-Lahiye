@@ -7,7 +7,7 @@ using Ulka_Bank.Entities;
 
 namespace Ulka_Bank.Repositiries
 {
-    internal class BankRepository : IBankRepository
+    internal class BankRepository :IBankRepository
     {
         Bank _bank;
         public Bank Bank { get => _bank; }
@@ -17,10 +17,10 @@ namespace Ulka_Bank.Repositiries
             _bank=  bank;
         }
 
-        public void CheckBalance(double balance)
+        public void CheckBalance(User user)
         {
            
-            Console.WriteLine(balance);
+            Console.WriteLine(user.Balance);
         }
 
         public void TopUpBalance(User user,double newBal)
@@ -32,6 +32,7 @@ namespace Ulka_Bank.Repositiries
         public string ChangePassword(User user, string newPas)
         {
             user.Password = newPas; ;
+            Console.WriteLine("New Password: ");
             return user.Password;
         }
         public void BankUserList()

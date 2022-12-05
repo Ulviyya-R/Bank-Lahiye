@@ -31,7 +31,7 @@ namespace Ulka_Bank.Service
                 if(item.Password == password )
                 {
                     double balance = 0.0;
-                    _repository.CheckBalance(balance);
+                    _repository.CheckBalance(item);
                     return true;
                 }
             }

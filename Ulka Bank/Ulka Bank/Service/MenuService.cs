@@ -30,6 +30,7 @@ namespace Ulka_Bank.Service
             string surname;
             do
             {
+                Console.WriteLine("User Registration \r\n");
                 Console.WriteLine("Please enter your name: ");
                 name = Console.ReadLine();
                 Console.WriteLine("Please enter your surname: ");
@@ -84,7 +85,8 @@ namespace Ulka_Bank.Service
         {
             string email;
             string password;
-             Console.WriteLine("Please enter your  email: ");
+            Console.WriteLine("Access To The Bank \r\n");
+            Console.WriteLine("Please enter your  email: ");
             email = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             password = Console.ReadLine();
@@ -116,16 +118,17 @@ namespace Ulka_Bank.Service
         public static void CheckBalance()
         {
             string password;
+            Console.WriteLine("Check Balance:\r\n ");
             Console.WriteLine("Please enter your password:  ");
             password = Console.ReadLine();
-                Console.WriteLine("    Balance:      ");
-            if(_bservice.CheckBalance(password))
+            Console.WriteLine("    Balance:      ");
+            if (_bservice.CheckBalance(password))
             {
-                Console.WriteLine("Returns to the bank menu...");
+                Console.WriteLine("Returns to the Bank Menu...");
                 Thread.Sleep(5000);
-                
+
             }
-            
+
         }
         #endregion
 
@@ -135,13 +138,14 @@ namespace Ulka_Bank.Service
         {
             string password;
             double newBalance;
-            Console.WriteLine("Please enter your password: ");
-            password=Console.ReadLine();
+            Console.WriteLine("Top Up Balance\r\n");
+            Console.WriteLine("Please enter  password: ");
+            password = Console.ReadLine();
             Console.WriteLine("Write the amount you will pay: ");
             newBalance = Convert.ToDouble(Console.ReadLine());
-            if(_bservice.TopUpBalance(password,newBalance))
+            if (_bservice.TopUpBalance(password, newBalance))
             {
-                Console.WriteLine("Returns to the bank menu...");
+                Console.WriteLine("Returns to the Bank Menu...");
                 Thread.Sleep(5000);
             }
         }
@@ -153,9 +157,12 @@ namespace Ulka_Bank.Service
             string password;
             string newPassw;
 
+            Console.WriteLine("Change Password\r\n");
             do
             {
+                Console.WriteLine("Please enter  Current Password: ");
                 password = Console.ReadLine();
+                Console.WriteLine("Please your New Password");
                 newPassw = Console.ReadLine();
                 Help.CheckPassword(newPassw);
             } while (!_bservice.ChangePassword(password, newPassw));
@@ -165,12 +172,15 @@ namespace Ulka_Bank.Service
         #region BankUserList
         public static void BankUserList()
         {
+            Console.WriteLine("Users \r\n");
             string email;
-            do
+            Console.WriteLine("Please enter Admin's email: ");
+            email = Console.ReadLine();
+            if (_bservice.BankUserList(email))
             {
-                Console.WriteLine("Enter your admin email");
-                email = Console.ReadLine();
-            } while (!_bservice.BankUserList(email));
+                Console.WriteLine("Returns to the Bank Menu...");
+                Thread.Sleep(5000);
+            }
         }
         #endregion
 
@@ -188,10 +198,19 @@ namespace Ulka_Bank.Service
 
 
         #endregion
+
+        #region LogOut
+        public static void LogOut()
+        {
+            MenuService.UserOptions();
+        }
+        #endregion
         #endregion
 
+        #region User and Bank Program Metods
         public static void BankOptions()
         {
+
 
 
             char BankServiceSelection;
@@ -231,10 +250,10 @@ namespace Ulka_Bank.Service
                         MenuService.BlockUser();
                         Console.Clear();
                         break;
-                    //case '6':
-                    //    MenuService.logo();
-                    //    Console.Clear();
-                    //    break;
+                    case '6':
+                        MenuService.LogOut();
+                        Console.Clear();
+                        break;
                     default:
                         Console.WriteLine("Please choose correct number");
                         Console.Clear();
@@ -242,19 +261,59 @@ namespace Ulka_Bank.Service
                 }
             } while (BankServiceSelection != '0');
         }
+
+        public static void UserOptions()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome Ulka Bank");
+            char UserServiceSelection;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            do
+            {
+                Console.WriteLine("1. Registration");
+                Console.WriteLine("2. Login");
+                Console.WriteLine("3. Find User");
+                Console.WriteLine("0. Exit");
+            selection:
+                UserServiceSelection = Console.ReadKey().KeyChar;
+                Console.Clear();
+                Console.WriteLine();
+                switch (UserServiceSelection)
+                {
+                    case '1':
+                        MenuService.UserRegistration();
+                        Console.Clear();
+                        break;
+                    case '2':
+                        MenuService.UserLogin();
+
+                        break;
+                    case '3':
+                        MenuService.FindUser();
+                        Console.Clear();
+                        break;
+                    default:
+                        Console.WriteLine("Please choose correct number");
+                        Console.Clear();
+                        goto selection;
+                }
+            } while (UserServiceSelection != '0');
         }
+        #endregion
     }
-
-    
-        
-    
+}
 
 
 
 
 
- 
 
 
-             
+
+
+
+
+
+
+
             
